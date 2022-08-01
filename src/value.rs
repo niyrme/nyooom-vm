@@ -33,7 +33,7 @@ const VALUE_FLOAT64: u8 = 0x16;
 const VALUE_CHAR: u8 = 0x17;
 const VALUE_STR: u8 = 0x18;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Value2 {
 	Null,
 	True,

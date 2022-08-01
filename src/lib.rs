@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use value::Value;
+use value::Value2;
 
 pub mod ast;
 pub mod bytes;
@@ -30,6 +30,6 @@ macro_rules! Err {
 	};
 }
 
-pub(crate) type ValueType = Value;
+pub(crate) type ValueType = Value2;
 
 pub const MAGIC_NUMBER: [u8; 3] = [0x6e, 0x79, 0x62];

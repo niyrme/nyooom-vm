@@ -12,7 +12,7 @@ pub mod int {
 	pub type Int32 = Int<i32>;
 	pub type Int64 = Int<i64>;
 
-	#[derive(Debug)]
+	#[derive(Debug, Clone, Copy)]
 	pub struct Int<T: IntT> {
 		value: T,
 	}
@@ -151,7 +151,7 @@ pub mod float {
 	pub type Float32 = Float<f32>;
 	pub type Float64 = Float<f64>;
 
-	#[derive(Debug)]
+	#[derive(Debug, Clone, Copy)]
 	pub struct Float<T: FloatT> {
 		value: T,
 	}

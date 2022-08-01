@@ -1,7 +1,7 @@
 use super::VALUE_CHAR;
 use crate::bytes::ToBytes;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Char {
 	value: char,
 }

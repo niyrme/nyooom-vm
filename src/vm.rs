@@ -7,6 +7,7 @@ use crate::{
 	ast::AST,
 	bytes::{FromBytes, ToBytes},
 	instruction::{Instruction, Instructions},
+	Err,
 	ValueType,
 	MAGIC_NUMBER,
 };
@@ -37,8 +38,8 @@ impl VM {
 	}
 
 	pub fn run(&mut self) -> Result<i32> {
-		if self.code[..3] == MAGIC_NUMBER {
-			self.code.drain(..3);
+		if self.code[..MAGIC_NUMBER.len()] == MAGIC_NUMBER {
+			self.code.drain(..MAGIC_NUMBER.len());
 		}
 
 		loop {
@@ -46,8 +47,8 @@ impl VM {
 				Instruction::Halt => match self.stack.pop() {
 					None => return Ok(0),
 					Some(val) => match val {
-						ValueType::Int32(v) => return Ok(v),
-						ValueType::Int64(v) => return Ok(v as i32),
+						ValueType::Int32(v) => return Ok(v.value()),
+						ValueType::Int64(v) => return Ok(v.value() as i32),
 						other => exit!(1, "cannot use {other:?} as exit code"),
 					},
 				},
@@ -63,6 +64,10 @@ impl VM {
 				}
 				#[allow(unreachable_patterns)]
 				other => exit!(1, "instruction not implemented: {other:?}"),
+			}
+
+			if self.code.is_empty() {
+				return Err!("program exited without HALT instruction!");
 			}
 		}
 	}
@@ -92,9 +97,15 @@ impl From<Instructions> for VM {
 	}
 }
 
+impl From<Vec<Instruction>> for VM {
+	fn from(instrs: Vec<Instruction>) -> Self {
+		Self::new(instrs.iter().flat_map(|instr| instr.bytes()).collect())
+	}
+}
+
 impl From<AST> for VM {
 	fn from(ast: AST) -> Self {
-		Self::new(ast.bytes())
+		Self::from(ast.toInstructions())
 	}
 }
 

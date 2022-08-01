@@ -3,7 +3,7 @@ use std::{ops::Add, string::String as StdString};
 use super::VALUE_STR;
 use crate::bytes::ToBytes;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct String {
 	value: StdString,
 }
