@@ -5,8 +5,8 @@ use value::Value;
 pub mod ast;
 pub mod bytes;
 mod instruction;
-// mod parser;
 pub mod token;
+pub mod tokenizer;
 mod value;
 pub mod vm;
 

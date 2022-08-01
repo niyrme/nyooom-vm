@@ -7,7 +7,8 @@ use crate::{
 	ast::AST,
 	bytes::{FromBytes, ToBytes},
 	instruction::{Instruction, Instructions},
-	MAGIC_NUMBER, ValueType,
+	ValueType,
+	MAGIC_NUMBER,
 };
 
 macro_rules! exit {

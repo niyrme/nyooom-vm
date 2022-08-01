@@ -1,8 +1,8 @@
-use self::{tokenkind::TokenKind, keyword::Keyword};
+use self::{keyword::Keyword, tokenkind::TokenKind};
 
 pub mod keyword;
-pub mod tokenkind;
 pub mod symbol;
+pub mod tokenkind;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum TokenValue {

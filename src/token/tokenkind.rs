@@ -1,8 +1,7 @@
 use std::io;
 
-use crate::Err;
-
 use super::symbol::Symbol;
+use crate::Err;
 
 type TryFromError = io::Error;
 
