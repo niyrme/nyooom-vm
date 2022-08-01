@@ -327,8 +327,8 @@ impl TryFrom<TokenValue> for Value2 {
 	fn try_from(value: TokenValue) -> Result<Self, Self::Error> {
 		match value {
 			TokenValue::Null => Ok(Self::Null),
-			TokenValue::Yep => Ok(Self::True),
-			TokenValue::Nop => Ok(Self::False),
+			TokenValue::True => Ok(Self::True),
+			TokenValue::False => Ok(Self::False),
 			TokenValue::Int(v) => Ok(Self::Int64((v as i64).into())),
 			TokenValue::Float(v) => Ok(Self::Float64(v.into())),
 			TokenValue::Char(v) => Ok(Self::Char(v.into())),

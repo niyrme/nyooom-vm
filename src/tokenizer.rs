@@ -128,30 +128,30 @@ impl Tokenizer {
 
 		while let Some(c) = stream.peek() {
 			if !(c.is_ascii_alphabetic() || c.eq(&&b'_')) {
-				match Keyword::try_from(kw.to_string()) {
-					Ok(v) => return Ok(Token::new(TokenKind::Keyword, TokenValue::Keyword(v), self.line)),
-					Err(_) => {
-						let tokenKV = match kw.as_str() {
-							"null" => Some((TokenKind::Null, TokenValue::Null)),
-							"yep" => Some((TokenKind::Bool, TokenValue::Yep)),
-							"nop" => Some((TokenKind::Bool, TokenValue::Nop)),
-							_ => None,
-						};
-
-						let token = match tokenKV {
-							Some((kind, value)) => Token::new(kind, value, self.line),
-							None => Token::new(TokenKind::Identifier, TokenValue::Identifier(kw), self.line),
-						};
-
-						return Ok(token);
-					}
-				};
+				break;
 			} else {
 				kw.push(*stream.next().unwrap() as char);
 			}
 		}
 
-		todo!()
+		match Keyword::try_from(kw.to_string()) {
+			Ok(v) => Ok(Token::new(TokenKind::Keyword, TokenValue::Keyword(v), self.line)),
+			Err(_) => {
+				let tokenKV = match kw.as_str() {
+					"null" => Some((TokenKind::Null, TokenValue::Null)),
+					"true" => Some((TokenKind::Bool, TokenValue::True)),
+					"false" => Some((TokenKind::Bool, TokenValue::False)),
+					_ => None,
+				};
+
+				let token = match tokenKV {
+					Some((kind, value)) => Token::new(kind, value, self.line),
+					None => Token::new(TokenKind::Identifier, TokenValue::Identifier(kw), self.line),
+				};
+
+				Ok(token)
+			}
+		}
 	}
 
 	fn makeChar(&mut self, stream: &mut Stream) -> Result<Token> {

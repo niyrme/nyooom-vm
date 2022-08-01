@@ -36,10 +36,6 @@ impl VM {
 		}
 	}
 
-	pub fn compile(&mut self) -> () {
-		todo!()
-	}
-
 	pub fn run(&mut self) -> Result<i32> {
 		if self.code[..3] == MAGIC_NUMBER {
 			self.code.drain(..3);

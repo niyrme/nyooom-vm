@@ -7,8 +7,8 @@ pub mod tokenkind;
 #[derive(Debug, Clone, PartialEq)]
 pub enum TokenValue {
 	Null,
-	Yep,
-	Nop,
+	True,
+	False,
 
 	Int(isize),
 
@@ -27,7 +27,7 @@ pub enum TokenValue {
 
 pub type TokenLine = u16;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Token {
 	kind:  TokenKind,
 	value: TokenValue,
