@@ -1,6 +1,6 @@
 use crate::{
 	bytes::{FromBytes, ToBytes},
-	value::Value,
+	ValueType,
 };
 
 // Instruction: 0x0_
@@ -20,7 +20,7 @@ pub(crate) type Instructions = Vec<u8>;
 #[derive(Debug)]
 pub enum Instruction {
 	Halt,
-	Push(Value),
+	Push(ValueType),
 	Pop,
 	Add,
 	Sub,
@@ -58,7 +58,7 @@ impl FromBytes for Instruction {
 		match bytes.remove(0) {
 			INSTR_HALT => Self::Halt,
 			INSTR_PUSH => {
-				let value = Value::fromBytes(bytes);
+				let value = ValueType::fromBytes(bytes);
 
 				Self::Push(value)
 			}

@@ -1,10 +1,33 @@
+use self::node::Node;
 use crate::{bytes::ToBytes, token::Token};
 
-pub struct AST {}
+pub mod literal;
+pub mod node;
+
+#[derive(Debug)]
+pub struct AST {
+	program: Node,
+}
+
+impl AST {
+	pub fn new(program: Node) -> Self {
+		Self { program }
+	}
+
+	pub fn program(&self) -> &Node {
+		&self.program
+	}
+}
+
+impl From<Node> for AST {
+	fn from(program: Node) -> Self {
+		Self { program }
+	}
+}
 
 impl ToBytes for AST {
 	fn bytes(&self) -> Vec<u8> {
-		todo!()
+		self.program.bytes()
 	}
 }
 

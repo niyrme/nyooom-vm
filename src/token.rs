@@ -4,7 +4,7 @@ pub mod keyword;
 pub mod tokenkind;
 pub mod symbol;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum TokenValue {
 	Null,
 	Yep,
@@ -27,7 +27,7 @@ pub enum TokenValue {
 
 pub type TokenLine = u16;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Token {
 	kind:  TokenKind,
 	value: TokenValue,

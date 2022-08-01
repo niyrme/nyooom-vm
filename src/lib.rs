@@ -1,5 +1,7 @@
 #![allow(non_snake_case)]
 
+use value::Value;
+
 pub mod ast;
 pub mod bytes;
 mod instruction;
@@ -28,11 +30,6 @@ macro_rules! Err {
 	};
 }
 
-#[macro_export]
-macro_rules! yeet {
-	($err:expr) => {
-		return Err(e)
-	};
-}
+pub(crate) type ValueType = Value;
 
 pub const MAGIC_NUMBER: [u8; 3] = [0x6e, 0x79, 0x62];

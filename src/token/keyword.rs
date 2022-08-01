@@ -2,7 +2,7 @@ use std::io;
 
 use crate::Err;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Keyword {
 	Let,
 	If,
