@@ -17,6 +17,7 @@ pub enum Node {
 	EmptyStatement,
 	ExpressionStatement(Box<Node>),
 	ForStatement(Option<Box<Node>>, Option<Box<Node>>, Option<Box<Node>>, Box<Node>),
+	/// Function(NAME, PARAMS, BODY)
 	Function(Box<Node>, Vec<Node>, Box<Node>),
 	Identifier(Token),
 	IfStatement(Box<Node>, Box<Node>, Option<Box<Node>>),
